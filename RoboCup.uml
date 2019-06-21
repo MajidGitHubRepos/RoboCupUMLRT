@@ -240,7 +240,9 @@ log.show(&quot;current: %.2f,    target: %.2f,     diff:%d\n&quot;, currentRotat
               <transition xmi:type="uml:Transition" xmi:id="_JRfCEIjxEeiP-_qqZZR9Jg" name="" kind="external" source="_nC4DsIjwEeiP-_qqZZR9Jg" target="_DhKCMIjxEeiP-_qqZZR9Jg">
                 <effect xmi:type="uml:OpaqueBehavior" xmi:id="_evMg0IjxEeiP-_qqZZR9Jg">
                   <language>C++</language>
-                  <body>//compass = std::stof(payload);
+                  <body>std::string payloadStr (payload);
+
+compass = std::atof(payloadStr.c_str());
  std::cout&lt;&lt;&quot;[RECEIVED]: &quot;&lt;&lt; payload &lt;&lt;&quot;\n&quot;;</body>
                 </effect>
                 <trigger xmi:type="uml:Trigger" xmi:id="_TBr2sJRUEem-h8JsU1axzg" port="_mMHdgJRPEem-h8JsU1axzg">
@@ -250,7 +252,9 @@ log.show(&quot;current: %.2f,    target: %.2f,     diff:%d\n&quot;, currentRotat
               <transition xmi:type="uml:Transition" xmi:id="_KEInAIjxEeiP-_qqZZR9Jg" kind="external" source="_DhKCMIjxEeiP-_qqZZR9Jg" target="_FJnY8IidEeiP-_qqZZR9Jg">
                 <effect xmi:type="uml:OpaqueBehavior" xmi:id="_iBafgIjxEeiP-_qqZZR9Jg">
                   <language>C++</language>
-                  <body>/*std::string payloadStr (payload);
+                  <body> std::cout&lt;&lt;&quot;[RECEIVED]: &quot;&lt;&lt; payload &lt;&lt;&quot;\n&quot;;
+
+std::string payloadStr (payload);
 int pos1 = payloadStr.find(&quot;,&quot;);
 std::string PlayerNameStr = payloadStr.substr(0, pos1);
 
@@ -270,7 +274,7 @@ playerZ = std::stof(zStr);
  std::cout&lt;&lt;&quot;[RECEIVED][playerX]: &quot;&lt;&lt; playerX &lt;&lt;&quot;\n&quot;;
  std::cout&lt;&lt;&quot;[RECEIVED][playerZ]: &quot;&lt;&lt; playerZ &lt;&lt;&quot;\n&quot;;
 
-*/</body>
+</body>
                 </effect>
                 <trigger xmi:type="uml:Trigger" xmi:id="_VzrnwJRVEem-h8JsU1axzg" port="_mMHdgJRPEem-h8JsU1axzg">
                   <event xmi:type="uml:CallEvent" href="pathmap://UMLRTRTSLIB/UMLRT-RTS.uml#_zwyoUK1YEee74Ow6RXIGBA"/>
@@ -325,8 +329,8 @@ playerZ = std::stof(zStr);
               <subvertex xmi:type="uml:State" xmi:id="_DhKCMIjxEeiP-_qqZZR9Jg" name="GET_PLAYER_POS">
                 <entry xmi:type="uml:OpaqueBehavior" xmi:id="_RBrn8IjxEeiP-_qqZZR9Jg" name="Entry">
                   <language>C++</language>
-                  <body>tcp.send(&quot;player2,Gps()&quot;);
- std::cout&lt;&lt;&quot;[SEND]: player2,Gps() \n&quot;;</body>
+                  <body>tcp.send(&quot;player2,GPS()&quot;);
+ std::cout&lt;&lt;&quot;[SEND]: player2,GPS() \n&quot;;</body>
                 </entry>
               </subvertex>
               <subvertex xmi:type="uml:State" xmi:id="_72xMkIj0EeiP-_qqZZR9Jg" name="DELAY">
@@ -578,7 +582,7 @@ timer.informIn(UMLRTTimespec(0, 0));*/</body>
   <UMLRTStateMachines:RTState xmi:id="_uUtxUIg6EeiP-_qqZZR9Jg" base_State="_uUsjMIg6EeiP-_qqZZR9Jg"/>
   <UMLRTStateMachines:RTRegion xmi:id="_uUu_cIg6EeiP-_qqZZR9Jg" base_Region="_uUoRwIg6EeiP-_qqZZR9Jg"/>
   <UMLRTStateMachines:RTStateMachine xmi:id="_uUyCwIg6EeiP-_qqZZR9Jg" base_StateMachine="_uUhkEIg6EeiP-_qqZZR9Jg"/>
-  <RTCppProperties:CapsuleProperties xmi:id="_cC8DQIhfEeiP-_qqZZR9Jg" headerPreface="#include &lt;string>&#xA;#include &lt;iostream>" implementationPreface="#include &lt;sys/socket.h>&#xA;#include &lt;netinet/in.h>&#xA;#include &lt;arpa/inet.h>&#xA;#include &lt;math.h> " base_Class="_J_oo8IgqEeiP-_qqZZR9Jg"/>
+  <RTCppProperties:CapsuleProperties xmi:id="_cC8DQIhfEeiP-_qqZZR9Jg" headerPreface="#include &lt;string>&#xA;#include &lt;iostream>&#xA;#include &lt;stdlib.h>&#xA;#include &lt;stdio.h>&#xA;#include &lt;cstring>&#xA;" implementationPreface="#include &lt;sys/socket.h>&#xA;#include &lt;netinet/in.h>&#xA;#include &lt;arpa/inet.h>&#xA;#include &lt;math.h> " base_Class="_J_oo8IgqEeiP-_qqZZR9Jg"/>
   <UMLRTStateMachines:RTState xmi:id="_4dRCIIicEeiP-_qqZZR9Jg" base_State="_4dPM8IicEeiP-_qqZZR9Jg"/>
   <UMLRTStateMachines:RTRegion xmi:id="_AYM4YIidEeiP-_qqZZR9Jg" base_Region="_AYJ1EIidEeiP-_qqZZR9Jg"/>
   <UMLRTStateMachines:RTPseudostate xmi:id="_AYQiwIidEeiP-_qqZZR9Jg" base_Pseudostate="_AYOGgIidEeiP-_qqZZR9Jg"/>
