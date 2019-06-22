@@ -136,8 +136,9 @@
       <ownedAttribute xmi:type="uml:Port" xmi:id="_oLctAIg6EeiP-_qqZZR9Jg" name="log" visibility="protected" isOrdered="true" aggregation="composite" isBehavior="true" isService="false">
         <type xmi:type="uml:Collaboration" href="pathmap://UMLRTRTSLIB/UMLRT-RTS.uml#_6kIb0IeXEeSVyrlWP4nYew"/>
       </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_IVPT8Ig7EeiP-_qqZZR9Jg" name="sock" visibility="public">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusC_Cpp_LIBRARIES/AnsiCLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_IVPT8Ig7EeiP-_qqZZR9Jg" name="ballReachable" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_5ukm4JUHEemnlJvKCgeTXw"/>
       </ownedAttribute>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_KiNh0Ig7EeiP-_qqZZR9Jg" name="minDistance" visibility="public">
         <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusC_Cpp_LIBRARIES/AnsiCLibrary.uml#_7W3wkBydEduyofBvg4RL2w"/>
@@ -161,10 +162,10 @@
       <ownedAttribute xmi:type="uml:Property" xmi:id="_yfQfgIiEEeiP-_qqZZR9Jg" name="compass">
         <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusC_Cpp_LIBRARIES/AnsiCLibrary.uml#_7W3wkBydEduyofBvg4RL2w"/>
       </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_0Zy5kIiEEeiP-_qqZZR9Jg" name="currentX">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_0Zy5kIiEEeiP-_qqZZR9Jg" name="ballX">
         <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusC_Cpp_LIBRARIES/AnsiCLibrary.uml#_7W3wkBydEduyofBvg4RL2w"/>
       </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_1R8pkIiEEeiP-_qqZZR9Jg" name="currentY">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_1R8pkIiEEeiP-_qqZZR9Jg" name="ballZ">
         <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusC_Cpp_LIBRARIES/AnsiCLibrary.uml#_7W3wkBydEduyofBvg4RL2w"/>
       </ownedAttribute>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_pwcy8IidEeiP-_qqZZR9Jg" name="playerController" visibility="protected" type="_qAMfIIidEeiP-_qqZZR9Jg" isOrdered="true" aggregation="composite"/>
@@ -214,12 +215,44 @@ tcp.connect(&quot;127.0.0.1&quot;,9003);
             <connectionPoint xmi:type="uml:Pseudostate" xmi:id="_AYOGgIidEeiP-_qqZZR9Jg" kind="entryPoint"/>
             <region xmi:type="uml:Region" xmi:id="_AYJ1EIidEeiP-_qqZZR9Jg" name="Region1">
               <transition xmi:type="uml:Transition" xmi:id="_EqPqcIifEeiP-_qqZZR9Jg" kind="local" source="_AYOGgIidEeiP-_qqZZR9Jg" target="_nC4DsIjwEeiP-_qqZZR9Jg"/>
-              <transition xmi:type="uml:Transition" xmi:id="_QevMMIifEeiP-_qqZZR9Jg" name="" kind="external" source="_FJnY8IidEeiP-_qqZZR9Jg" target="_Bft6EIidEeiP-_qqZZR9Jg">
+              <transition xmi:type="uml:Transition" xmi:id="_QevMMIifEeiP-_qqZZR9Jg" name="" kind="external" source="_FJnY8IidEeiP-_qqZZR9Jg" target="_OR5vwJUCEemnlJvKCgeTXw">
                 <effect xmi:type="uml:OpaqueBehavior" xmi:id="_ZN24cIifEeiP-_qqZZR9Jg">
                   <language>C++</language>
-                  <body>//currentX = x;
-//currentY = y;</body>
+                  <body> std::cout&lt;&lt;&quot;[RECEIVED]: &quot;&lt;&lt; payload &lt;&lt;&quot;\n&quot;;
+
+std::string payloadStr (payload);
+int pos1 = payloadStr.find(&quot;,&quot;);
+std::string PlayerNameStr = payloadStr.substr(0, pos1);
+
+int pos2 = payloadStr.find(&quot;,&quot;,pos1+1);
+std::string xStr = payloadStr.substr(pos1+1, pos2);
+
+int size = payloadStr.size();
+
+std::string zStr = payloadStr.substr(pos2+1, size);
+
+
+
+
+ballX = std::stof(xStr);
+ballZ = std::stof(zStr);
+
+std::cout&lt;&lt;&quot;[RECEIVED][ballX]: &quot;&lt;&lt; ballX &lt;&lt;&quot;\n&quot;;
+std::cout&lt;&lt;&quot;[RECEIVED][ballZ]: &quot;&lt;&lt; ballZ &lt;&lt;&quot;\n&quot;;
+
+
+//====================[isBallReachable?]============================
+
+if ((abs(ballX - playerX) &lt; 4.5) &amp;&amp; (abs(ballZ - playerZ) &lt; 1))
+	ballReachable = true;
+else
+	ballReachable = false;
+	
+</body>
                 </effect>
+                <trigger xmi:type="uml:Trigger" xmi:id="_Eu_EgJUBEemnlJvKCgeTXw" port="_mMHdgJRPEem-h8JsU1axzg">
+                  <event xmi:type="uml:CallEvent" href="pathmap://UMLRTRTSLIB/UMLRT-RTS.uml#_zwyoUK1YEee74Ow6RXIGBA"/>
+                </trigger>
               </transition>
               <transition xmi:type="uml:Transition" xmi:id="_bLnloIifEeiP-_qqZZR9Jg" name="" kind="external" source="_Bft6EIidEeiP-_qqZZR9Jg" target="_d1JkUIj6EeiP-_qqZZR9Jg">
                 <effect xmi:type="uml:OpaqueBehavior" xmi:id="_hByu0IifEeiP-_qqZZR9Jg">
@@ -297,13 +330,81 @@ playerZ = std::stof(zStr);
               </transition>
               <transition xmi:type="uml:Transition" xmi:id="_Cp4QYIj7EeiP-_qqZZR9Jg" name="" kind="external" source="_jtURkIj6EeiP-_qqZZR9Jg" target="_72xMkIj0EeiP-_qqZZR9Jg"/>
               <transition xmi:type="uml:Transition" xmi:id="_ytSugIkTEeiP-_qqZZR9Jg" kind="external" source="_d1JkUIj6EeiP-_qqZZR9Jg" target="_fauREIikEeiP-_qqZZR9Jg"/>
-              <subvertex xmi:type="uml:State" xmi:id="_Bft6EIidEeiP-_qqZZR9Jg" name="GET_MY_ROTATION">
+              <transition xmi:type="uml:Transition" xmi:id="_AnqF8JUFEemnlJvKCgeTXw" name="NO" guard="_Y9PwwJUFEemnlJvKCgeTXw" kind="external" source="_OR5vwJUCEemnlJvKCgeTXw" target="_Bft6EIidEeiP-_qqZZR9Jg">
+                <ownedRule xmi:type="uml:Constraint" xmi:id="_Y9PwwJUFEemnlJvKCgeTXw">
+                  <specification xmi:type="uml:OpaqueExpression" xmi:id="_Y9Rl8JUFEemnlJvKCgeTXw">
+                    <language>C++</language>
+                    <body>
+return !ballReachable;</body>
+                  </specification>
+                </ownedRule>
+                <effect xmi:type="uml:OpaqueBehavior" xmi:id="_7ofyYJUGEemnlJvKCgeTXw" name="Effect" isReentrant="false">
+                  <language>C++</language>
+                  <body> std::cout&lt;&lt;&quot;[ballReachable]: &quot;&lt;&lt; ballReachable &lt;&lt;&quot;\n&quot;;</body>
+                </effect>
+              </transition>
+              <transition xmi:type="uml:Transition" xmi:id="_SudTQJUFEemnlJvKCgeTXw" name="YES" guard="_y_mC4JUGEemnlJvKCgeTXw" kind="external" source="_OR5vwJUCEemnlJvKCgeTXw" target="_DAwEQJUFEemnlJvKCgeTXw">
+                <ownedRule xmi:type="uml:Constraint" xmi:id="_y_mC4JUGEemnlJvKCgeTXw">
+                  <specification xmi:type="uml:OpaqueExpression" xmi:id="_y_nRAJUGEemnlJvKCgeTXw">
+                    <language>C++</language>
+                    <body>return ballReachable;</body>
+                  </specification>
+                </ownedRule>
+                <effect xmi:type="uml:OpaqueBehavior" xmi:id="_3Xf3QJUGEemnlJvKCgeTXw" name="Effect" isReentrant="false">
+                  <language>C++</language>
+                  <body> std::cout&lt;&lt;&quot;[ballReachable]: &quot;&lt;&lt; ballReachable &lt;&lt;&quot;\n&quot;;</body>
+                </effect>
+              </transition>
+              <transition xmi:type="uml:Transition" xmi:id="_PBaiUJUcEemnlJvKCgeTXw" name="" kind="external" source="_Bft6EIidEeiP-_qqZZR9Jg" target="_MjYMEJU8EemnlJvKCgeTXw">
+                <trigger xmi:type="uml:Trigger" xmi:id="_bBxV0JUcEemnlJvKCgeTXw" port="_Qi1zAIj1EeiP-_qqZZR9Jg">
+                  <event xmi:type="uml:CallEvent" href="pathmap://UMLRTRTSLIB/UMLRT-RTS.uml#_IaEO8HDxEeSwWKwNKw1iAA"/>
+                </trigger>
+              </transition>
+              <transition xmi:type="uml:Transition" xmi:id="_R7CNQJU8EemnlJvKCgeTXw" name="" kind="external" source="_MjYMEJU8EemnlJvKCgeTXw" target="_nC4DsIjwEeiP-_qqZZR9Jg">
+                <trigger xmi:type="uml:Trigger" xmi:id="_ZqOGgJU8EemnlJvKCgeTXw" port="_Qi1zAIj1EeiP-_qqZZR9Jg">
+                  <event xmi:type="uml:CallEvent" href="pathmap://UMLRTRTSLIB/UMLRT-RTS.uml#_IaEO8HDxEeSwWKwNKw1iAA"/>
+                </trigger>
+              </transition>
+              <subvertex xmi:type="uml:State" xmi:id="_Bft6EIidEeiP-_qqZZR9Jg" name="CALC_MOVMENT_TO_BALL">
                 <entry xmi:type="uml:OpaqueBehavior" xmi:id="_O7a_UIifEeiP-_qqZZR9Jg" name="Entry">
                   <language>C++</language>
-                  <body>//controlProtocol.getCompass().send();</body>
+                  <body>std::cout&lt;&lt;&quot;[CALC_MOVMENT_TO_BALL] \n&quot;;
+
+int moveForward =  ballX - playerX;
+int moveRight =  ballZ - playerZ;
+
+std::cout&lt;&lt;&quot;[CALC_MOVMENT_TO_BALL][moveForward]:&quot;&lt;&lt; moveForward &lt;&lt;&quot;\n&quot;;
+std::cout&lt;&lt;&quot;[CALC_MOVMENT_TO_BALL][moveRight]:&quot;&lt;&lt; moveRight &lt;&lt;&quot;\n&quot;;
+
+
+if (moveForward > 0)
+	tcp.send(&quot;player2,moveForward(-100)&quot;);
+else if (moveForward == 0) 
+	tcp.send(&quot;player2,moveForward(0)&quot;);
+else 
+	tcp.send(&quot;player2,moveForward(100)&quot;);
+
+
+if (moveRight > 0)
+	tcp.send(&quot;player2,moveRight(-100)&quot;);
+else if (moveRight == 0) 
+	tcp.send(&quot;player2,moveRight(0)&quot;);
+else 
+	tcp.send(&quot;player2,moveRight(100)&quot;);
+
+
+timer.informIn(UMLRTTimespec(0, 900000000));
+
+</body>
                 </entry>
               </subvertex>
-              <subvertex xmi:type="uml:State" xmi:id="_FJnY8IidEeiP-_qqZZR9Jg" name="GET_MY_POSITION"/>
+              <subvertex xmi:type="uml:State" xmi:id="_FJnY8IidEeiP-_qqZZR9Jg" name="GET_BALL_POSITION">
+                <entry xmi:type="uml:OpaqueBehavior" xmi:id="_sh9f0JUAEemnlJvKCgeTXw" name="Entry" isReentrant="false">
+                  <language>C++</language>
+                  <body>tcp.send(&quot;ball,GPS()&quot;);
+ std::cout&lt;&lt;&quot;[SEND]: ball,GPS() \n&quot;;</body>
+                </entry>
+              </subvertex>
               <subvertex xmi:type="uml:State" xmi:id="_fauREIikEeiP-_qqZZR9Jg" name="FOLLOW">
                 <entry xmi:type="uml:OpaqueBehavior" xmi:id="_MwBQAIilEeiP-_qqZZR9Jg" name="Entry">
                   <language>C++</language>
@@ -353,6 +454,21 @@ playerZ = std::stof(zStr);
 //	controlProtocol.setPower(50, 0).send();
 //	log.show(&quot;Steering Right!\n&quot;);
 //}</body>
+                </entry>
+              </subvertex>
+              <subvertex xmi:type="uml:Pseudostate" xmi:id="_OR5vwJUCEemnlJvKCgeTXw" name="isBallReachable?" kind="choice"/>
+              <subvertex xmi:type="uml:State" xmi:id="_DAwEQJUFEemnlJvKCgeTXw" name="GET_BALL">
+                <entry xmi:type="uml:OpaqueBehavior" xmi:id="_ARpHwJUHEemnlJvKCgeTXw" name="Entry" isReentrant="false">
+                  <language>C++</language>
+                  <body> std::cout&lt;&lt;&quot;[GET_BALL] \n&quot;;</body>
+                </entry>
+              </subvertex>
+              <subvertex xmi:type="uml:State" xmi:id="_MjYMEJU8EemnlJvKCgeTXw" name="STOP">
+                <entry xmi:type="uml:OpaqueBehavior" xmi:id="_U2lYYJU8EemnlJvKCgeTXw" name="Entry" isReentrant="false">
+                  <language>C++</language>
+                  <body> std::cout&lt;&lt;&quot;[SEND] player2,stop() \n&quot;;
+tcp.send(&quot;player2,stop()&quot;);
+timer.informIn(UMLRTTimespec(0, 100000000));</body>
                 </entry>
               </subvertex>
             </region>
@@ -622,7 +738,10 @@ timer.informIn(UMLRTTimespec(0, 0));*/</body>
   <UMLRTStateMachines:RTPseudostate xmi:id="_d1NOsIj6EeiP-_qqZZR9Jg" base_Pseudostate="_d1JkUIj6EeiP-_qqZZR9Jg"/>
   <UMLRTStateMachines:RTState xmi:id="_jtWt0Ij6EeiP-_qqZZR9Jg" base_State="_jtURkIj6EeiP-_qqZZR9Jg"/>
   <UMLRealTime:RTPort xmi:id="_mO2ocJRPEem-h8JsU1axzg" isPublish="false" isWired="false" base_Port="_mMHdgJRPEem-h8JsU1axzg"/>
-  <RTCppProperties:CapsuleProperties xmi:id="_viXhkJRXEem-h8JsU1axzg" headerPreface="#include &lt;string>&#xA;#include &lt;iostream>" base_Class="_HR_-AIgqEeiP-_qqZZR9Jg"/>
+  <RTCppProperties:CapsuleProperties xmi:id="_viXhkJRXEem-h8JsU1axzg" headerPreface="#include &lt;string>&#xA;#include &lt;iostream>&#xA;#include &lt;cstdlib>&#xA;" base_Class="_HR_-AIgqEeiP-_qqZZR9Jg"/>
   <UMLRealTime:RTPort xmi:id="_BdaUYJRkEem-h8JsU1axzg" isPublish="false" isWired="false" base_Port="_BdWqAJRkEem-h8JsU1axzg"/>
   <UMLRealTime:RTPort xmi:id="_EJLXEJRkEem-h8JsU1axzg" isPublish="false" isWired="false" base_Port="_EJI60JRkEem-h8JsU1axzg"/>
+  <UMLRTStateMachines:RTPseudostate xmi:id="_OSaGEJUCEemnlJvKCgeTXw" base_Pseudostate="_OR5vwJUCEemnlJvKCgeTXw"/>
+  <UMLRTStateMachines:RTState xmi:id="_DAzHkJUFEemnlJvKCgeTXw" base_State="_DAwEQJUFEemnlJvKCgeTXw"/>
+  <UMLRTStateMachines:RTState xmi:id="_MjbPYJU8EemnlJvKCgeTXw" base_State="_MjYMEJU8EemnlJvKCgeTXw"/>
 </xmi:XMI>
