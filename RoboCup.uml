@@ -257,7 +257,7 @@ std::cout&lt;&lt;&quot;[RECEIVED][ballZ]: &quot;&lt;&lt; ballZ &lt;&lt;&quot;\n&
 
 //====================[isBallReachable?]============================
 
-if ((abs(ballX - playerX) &lt; 4.5) &amp;&amp; (abs(ballZ - playerZ) &lt; 4))
+if ((abs(ballX - playerX) &lt; 8) &amp;&amp; (abs(ballZ - playerZ) &lt; 8))
 	ballReachable = true;
 else
 	ballReachable = false;</body>
@@ -359,7 +359,7 @@ return !ballReachable;</body>
                   <event xmi:type="uml:CallEvent" href="pathmap://UMLRTRTSLIB/UMLRT-RTS.uml#_IaEO8HDxEeSwWKwNKw1iAA"/>
                 </trigger>
               </transition>
-              <transition xmi:type="uml:Transition" xmi:id="_E4_YMJXJEemnlJvKCgeTXw" name="" kind="external" source="_yVZhMJXIEemnlJvKCgeTXw" target="_ctKXAJXUEemnlJvKCgeTXw">
+              <transition xmi:type="uml:Transition" xmi:id="_E4_YMJXJEemnlJvKCgeTXw" name="" kind="external" source="_yVZhMJXIEemnlJvKCgeTXw" target="_MvipoJYJEemnlJvKCgeTXw">
                 <effect xmi:type="uml:OpaqueBehavior" xmi:id="_dRqWwJXKEemnlJvKCgeTXw" name="Effect" isReentrant="false">
                   <language>C++</language>
                   <body>if ((ballZ-playerZ &lt; 0) &amp;&amp; (abs(direction - 90)&lt;1))
@@ -378,7 +378,9 @@ else if((ballX-playerX > 0) &amp;&amp; (abs(direction - 0)&lt;1))
 	ballReachable = true;
 
 else
-	ballReachable = false;</body>
+	ballReachable = false;
+
+</body>
                 </effect>
                 <trigger xmi:type="uml:Trigger" xmi:id="_Ul-jkJXLEemnlJvKCgeTXw" port="_Qi1zAIj1EeiP-_qqZZR9Jg">
                   <event xmi:type="uml:CallEvent" href="pathmap://UMLRTRTSLIB/UMLRT-RTS.uml#_IaEO8HDxEeSwWKwNKw1iAA"/>
@@ -392,7 +394,7 @@ else
                   </specification>
                 </ownedRule>
               </transition>
-              <transition xmi:type="uml:Transition" xmi:id="_sTDRUJXVEemnlJvKCgeTXw" name="NO_STOP" guard="_8mLsIJXWEemnlJvKCgeTXw" kind="external" source="_ctKXAJXUEemnlJvKCgeTXw" target="_MjYMEJU8EemnlJvKCgeTXw">
+              <transition xmi:type="uml:Transition" xmi:id="_sTDRUJXVEemnlJvKCgeTXw" name="NO_STOP" guard="_8mLsIJXWEemnlJvKCgeTXw" kind="external" source="_ctKXAJXUEemnlJvKCgeTXw" target="_nC4DsIjwEeiP-_qqZZR9Jg">
                 <ownedRule xmi:type="uml:Constraint" xmi:id="_8mLsIJXWEemnlJvKCgeTXw">
                   <specification xmi:type="uml:OpaqueExpression" xmi:id="_8mMTMJXWEemnlJvKCgeTXw">
                     <language>C++</language>
@@ -415,6 +417,11 @@ else
                     <body>return ballPossesion;</body>
                   </specification>
                 </ownedRule>
+              </transition>
+              <transition xmi:type="uml:Transition" xmi:id="_XwG0EJYJEemnlJvKCgeTXw" kind="external" source="_MvipoJYJEemnlJvKCgeTXw" target="_ctKXAJXUEemnlJvKCgeTXw">
+                <trigger xmi:type="uml:Trigger" xmi:id="_e5q3wJYJEemnlJvKCgeTXw" port="_Qi1zAIj1EeiP-_qqZZR9Jg">
+                  <event xmi:type="uml:CallEvent" href="pathmap://UMLRTRTSLIB/UMLRT-RTS.uml#_IaEO8HDxEeSwWKwNKw1iAA"/>
+                </trigger>
               </transition>
               <subvertex xmi:type="uml:State" xmi:id="_Bft6EIidEeiP-_qqZZR9Jg" name="CALC_MOVMENT_TO_BALL">
                 <entry xmi:type="uml:OpaqueBehavior" xmi:id="_O7a_UIifEeiP-_qqZZR9Jg" name="Entry">
@@ -518,6 +525,14 @@ timer.informIn(UMLRTTimespec(0, spinTime));</body>
               </subvertex>
               <subvertex xmi:type="uml:Pseudostate" xmi:id="_ctKXAJXUEemnlJvKCgeTXw" kind="choice"/>
               <subvertex xmi:type="uml:Pseudostate" xmi:id="_sBq8sJXxEemnlJvKCgeTXw" kind="choice"/>
+              <subvertex xmi:type="uml:State" xmi:id="_MvipoJYJEemnlJvKCgeTXw" name="STOP_SPIN">
+                <entry xmi:type="uml:OpaqueBehavior" xmi:id="_WmrG0JYJEemnlJvKCgeTXw" name="Entry" isReentrant="false">
+                  <language>C++</language>
+                  <body> std::cout&lt;&lt;&quot;[SEND] player2,stop() \n&quot;;
+tcp.send(&quot;player2,stop()&quot;);
+timer.informIn(UMLRTTimespec(0, 100000000));</body>
+                </entry>
+              </subvertex>
             </region>
           </subvertex>
           <subvertex xmi:type="uml:State" xmi:id="_UoQP8JXVEemnlJvKCgeTXw" name="MOVMENT_TOWARDS_GOAL"/>
@@ -931,4 +946,5 @@ timer.informIn(UMLRTTimespec(0, 0));*/</body>
   <UMLRTStateMachines:RTPseudostate xmi:id="_FAUdgJXwEemnlJvKCgeTXw" base_Pseudostate="_FASBQJXwEemnlJvKCgeTXw"/>
   <UMLRTStateMachines:RTPseudostate xmi:id="_sB0tsJXxEemnlJvKCgeTXw" base_Pseudostate="_sBq8sJXxEemnlJvKCgeTXw"/>
   <RTCppProperties:CapsuleProperties xmi:id="_uEqrAJX4EemnlJvKCgeTXw" headerPreface="#include &lt;string>&#xA;#include &lt;iostream>&#xA;#include &lt;stdlib.h>&#xA;#include &lt;stdio.h>&#xA;#include &lt;cstring>" base_Class="_VuOiEJXsEemnlJvKCgeTXw"/>
+  <UMLRTStateMachines:RTState xmi:id="_MvoJMJYJEemnlJvKCgeTXw" base_State="_MvipoJYJEemnlJvKCgeTXw"/>
 </xmi:XMI>
