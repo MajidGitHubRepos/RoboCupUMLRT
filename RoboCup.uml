@@ -159,6 +159,14 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusC_Cpp_LIBRARIES/AnsiCLibrary.uml#_7W3wkBydEduyofBvg4RL2w"/>
         <defaultValue xmi:type="uml:LiteralReal" xmi:id="_Tj5h8IiBEeiP-_qqZZR9Jg"/>
       </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_QQGO4IiBEeiP-_qqZZR9Jg" name="prvPlayerX">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusC_Cpp_LIBRARIES/AnsiCLibrary.uml#_7W3wkBydEduyofBvg4RL2w"/>
+        <defaultValue xmi:type="uml:LiteralReal" xmi:id="_Tj5h8IiBEeiP-_qqZZR9Jg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_QQGO4IiBEeiP-_qqZZR9Jg" name="prvPlayerZ">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusC_Cpp_LIBRARIES/AnsiCLibrary.uml#_7W3wkBydEduyofBvg4RL2w"/>
+        <defaultValue xmi:type="uml:LiteralReal" xmi:id="_Tj5h8IiBEeiP-_qqZZR9Jg"/>
+      </ownedAttribute>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_UzmPQIiBEeiP-_qqZZR9Jg" name="playerZ" visibility="public">
         <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusC_Cpp_LIBRARIES/AnsiCLibrary.uml#_7W3wkBydEduyofBvg4RL2w"/>
         <defaultValue xmi:type="uml:LiteralReal" xmi:id="_WcgGwIiBEeiP-_qqZZR9Jg"/>
@@ -257,7 +265,7 @@ std::cout&lt;&lt;&quot;[RECEIVED][ballZ]: &quot;&lt;&lt; ballZ &lt;&lt;&quot;\n&
 
 //====================[isBallReachable?]============================
 
-if ((abs(ballX - playerX) &lt; 8) &amp;&amp; (abs(ballZ - playerZ) &lt; 8))
+if ((abs(ballX - playerX) &lt; 5) &amp;&amp; (abs(ballZ - playerZ) &lt; 5))
 	ballReachable = true;
 else
 	ballReachable = false;</body>
@@ -360,28 +368,6 @@ return !ballReachable;</body>
                 </trigger>
               </transition>
               <transition xmi:type="uml:Transition" xmi:id="_E4_YMJXJEemnlJvKCgeTXw" name="" kind="external" source="_yVZhMJXIEemnlJvKCgeTXw" target="_MvipoJYJEemnlJvKCgeTXw">
-                <effect xmi:type="uml:OpaqueBehavior" xmi:id="_dRqWwJXKEemnlJvKCgeTXw" name="Effect" isReentrant="false">
-                  <language>C++</language>
-                  <body>if ((ballZ-playerZ &lt; 0) &amp;&amp; (abs(direction - 90)&lt;1))
-	ballReachable = true;
-
-else if((ballZ-playerZ > 0) &amp;&amp; (abs(direction - 270)&lt;1))
-	ballReachable = true;
-
-else if((ballX-playerX &lt; 0) &amp;&amp; (abs(direction - 180)&lt;1))
-	ballReachable = true;
-
-else if((ballX-playerX > 0) &amp;&amp; (abs(direction - 360)&lt;1))
-	ballReachable = true;
-
-else if((ballX-playerX > 0) &amp;&amp; (abs(direction - 0)&lt;1))
-	ballReachable = true;
-
-else
-	ballReachable = false;
-
-</body>
-                </effect>
                 <trigger xmi:type="uml:Trigger" xmi:id="_Ul-jkJXLEemnlJvKCgeTXw" port="_Qi1zAIj1EeiP-_qqZZR9Jg">
                   <event xmi:type="uml:CallEvent" href="pathmap://UMLRTRTSLIB/UMLRT-RTS.uml#_IaEO8HDxEeSwWKwNKw1iAA"/>
                 </trigger>
@@ -428,14 +414,81 @@ else
                   <language>C++</language>
                   <body>std::cout&lt;&lt;&quot;[CALC_MOVMENT_TO_BALL] \n&quot;;
 
-int moveForward =  playerX - ballX;
-int moveRight =  playerZ - ballZ;
+int moveForward =  playerZ - ballZ;
+int moveRight =  playerX - ballX;
+
+int forwardProgress = abs(abs(playerZ) - abs (prvPlayerZ));
+int rightProgress = abs(abs(playerX) - abs (prvPlayerX));
+
+prvPlayerX = playerX;
+prvPlayerZ = playerZ;
+
 
 std::cout&lt;&lt;&quot;[CALC_MOVMENT_TO_BALL][moveForward]:&quot;&lt;&lt; moveForward &lt;&lt;&quot;\n&quot;;
 std::cout&lt;&lt;&quot;[CALC_MOVMENT_TO_BALL][moveRight]:&quot;&lt;&lt; moveRight &lt;&lt;&quot;\n&quot;;
 
 //if ((270 - direction > 0))){
 
+int moveForwardPower  = 0;
+int moveRightPower  = 0;
+
+if ((moveForward > 10) &amp;&amp; (moveRight > 10)){
+	moveForwardPower = 100;
+	moveRightPower = 100;
+}else if ((moveForward &lt; -10) &amp;&amp; (moveRight &lt; -10)){
+	moveForwardPower = -100;
+	moveRightPower = -100;
+}else if ((moveForward > 10) &amp;&amp; (moveRight &lt; -10)){
+	moveForwardPower = 100;
+	moveRightPower = -100;
+}else if ((moveForward &lt; -10) &amp;&amp; (moveRight > 10)){
+	moveForwardPower = -100;
+	moveRightPower = 100;
+}else if (moveForward > 10){
+	moveForwardPower = 100;
+	moveRightPower = moveRight*5;
+}else if (moveForward &lt; -10){
+	moveForwardPower = -100;
+	moveRightPower = moveRight*5;
+}else if (moveRight &lt; -10){
+	moveRightPower = -100;
+	moveForwardPower = moveForward*5;
+}else if (moveRight > 10){
+	moveRightPower = 100;
+	moveForwardPower = moveForward*5;
+}else {
+	moveRightPower = moveRight*5;
+	moveForwardPower = moveForward*5;
+}
+
+std::cout&lt;&lt;&quot;[CALC_MOVMENT_TO_BALL][forwardProgress]:&quot;&lt;&lt; forwardProgress &lt;&lt;&quot;\n&quot;;
+std::cout&lt;&lt;&quot;[CALC_MOVMENT_TO_BALL][rightProgress]:&quot;&lt;&lt; rightProgress &lt;&lt;&quot;\n&quot;;
+
+
+if ( (rightProgress &lt; 0.1) &amp;&amp; (forwardProgress &lt; 0.1)){
+	moveRightPower = 0;
+}
+//if (rightProgress &lt; 0.1)
+//	moveRightPower = 0;
+
+
+std::string cmd1 = &quot;player2,moveForward(&quot;+std::to_string(moveForwardPower)+&quot;)&quot;;
+std::cout&lt;&lt;&quot;[CALC_MOVMENT_TO_BALL][moveForward CMD]:&quot;&lt;&lt; cmd1 &lt;&lt;&quot;\n&quot;;
+char* cmdCHAR1 = strcpy(new char[cmd1.length() + 1], cmd1.c_str());
+tcp.send(cmdCHAR1);
+
+std::string cmd2 = &quot;player2,moveRight(&quot;+std::to_string(moveRightPower)+&quot;)&quot;;
+std::cout&lt;&lt;&quot;[CALC_MOVMENT_TO_BALL][moveRight CMD]:&quot;&lt;&lt; cmd2 &lt;&lt;&quot;\n&quot;;
+char* cmdCHAR2 = strcpy(new char[cmd2.length() + 1], cmd2.c_str());
+tcp.send(cmdCHAR2);
+
+
+
+
+std::cout&lt;&lt;&quot;[CALC_MOVMENT_TO_BALL][moveForwardPower]:&quot;&lt;&lt; moveForwardPower &lt;&lt;&quot;\n&quot;;
+std::cout&lt;&lt;&quot;[CALC_MOVMENT_TO_BALL][moveRightPower]:&quot;&lt;&lt; moveRightPower &lt;&lt;&quot;\n&quot;;
+
+/*
 	if (moveForward > 0)
 		tcp.send(&quot;player2,moveForward(100)&quot;);
 	else if (moveForward == 0) 
@@ -451,7 +504,7 @@ std::cout&lt;&lt;&quot;[CALC_MOVMENT_TO_BALL][moveRight]:&quot;&lt;&lt; moveRigh
 	else 
 		tcp.send(&quot;player2,moveRight(-100)&quot;);
 
-//}
+*/
 timer.informIn(UMLRTTimespec(0, 900000000));
 
 </body>
@@ -486,7 +539,7 @@ timer.informIn(UMLRTTimespec(0, 900000000));
 
 tcp.send(&quot;player2,setSuction(100)&quot;);
 
-timer.informIn(UMLRTTimespec(0, 100000000));
+timer.informIn(UMLRTTimespec(0, 500000000));
 </body>
                 </entry>
               </subvertex>
@@ -495,7 +548,7 @@ timer.informIn(UMLRTTimespec(0, 100000000));
                   <language>C++</language>
                   <body> std::cout&lt;&lt;&quot;[SEND] player2,stop() \n&quot;;
 tcp.send(&quot;player2,stop()&quot;);
-timer.informIn(UMLRTTimespec(0, 100000000));</body>
+timer.informIn(UMLRTTimespec(0, 500000000));</body>
                 </entry>
               </subvertex>
               <subvertex xmi:type="uml:State" xmi:id="_yVZhMJXIEemnlJvKCgeTXw" name="SPIN_TO_BALL">
@@ -528,9 +581,31 @@ timer.informIn(UMLRTTimespec(0, spinTime));</body>
               <subvertex xmi:type="uml:State" xmi:id="_MvipoJYJEemnlJvKCgeTXw" name="STOP_SPIN">
                 <entry xmi:type="uml:OpaqueBehavior" xmi:id="_WmrG0JYJEemnlJvKCgeTXw" name="Entry" isReentrant="false">
                   <language>C++</language>
-                  <body> std::cout&lt;&lt;&quot;[SEND] player2,stop() \n&quot;;
+                  <body>std::cout&lt;&lt;&quot;[SEND] player2,stop() \n&quot;;
 tcp.send(&quot;player2,stop()&quot;);
-timer.informIn(UMLRTTimespec(0, 100000000));</body>
+
+if ((ballZ-playerZ &lt; 0) &amp;&amp; (abs(direction - 90)&lt;1))
+	ballReachable = true;
+
+else if((ballZ-playerZ > 0) &amp;&amp; (abs(direction - 270)&lt;1))
+	ballReachable = true;
+
+else if((ballX-playerX &lt; 0) &amp;&amp; (abs(direction - 180)&lt;1))
+	ballReachable = true;
+
+else if((ballX-playerX > 0) &amp;&amp; (abs(direction - 360)&lt;1))
+	ballReachable = true;
+
+else if((ballX-playerX > 0) &amp;&amp; (abs(direction - 0)&lt;1))
+	ballReachable = true;
+
+else
+	ballReachable = false;
+
+
+
+
+timer.informIn(UMLRTTimespec(0, 500000000));</body>
                 </entry>
               </subvertex>
             </region>
