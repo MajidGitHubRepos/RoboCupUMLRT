@@ -660,7 +660,7 @@ timer.informIn(UMLRTTimespec(0, 500000000));</body>
                   <language>C++</language>
                   <body>std::cout&lt;&lt;&quot;YES&quot;&lt;&lt;&quot;\n&quot;;
 
-observationPort.setCommand(&quot;player2,setsetSuction(100)&quot;).send();</body>
+</body>
                 </effect>
               </transition>
               <transition xmi:type="uml:Transition" xmi:id="_aHxLsJeNEemu8v-9gGlQEg" name="" kind="external" source="_n-cNIJd4Eemu8v-9gGlQEg" target="_3_GrAJeREemu8v-9gGlQEg">
@@ -668,7 +668,7 @@ observationPort.setCommand(&quot;player2,setsetSuction(100)&quot;).send();</body
                   <event xmi:type="uml:CallEvent" href="pathmap://UMLRTRTSLIB/UMLRT-RTS.uml#_IaEO8HDxEeSwWKwNKw1iAA"/>
                 </trigger>
               </transition>
-              <transition xmi:type="uml:Transition" xmi:id="_a-5A8JeNEemu8v-9gGlQEg" guard="_XRKqoJeQEemu8v-9gGlQEg" kind="external" source="_Xlmw8JeNEemu8v-9gGlQEg" target="_n-cNIJd4Eemu8v-9gGlQEg">
+              <transition xmi:type="uml:Transition" xmi:id="_a-5A8JeNEemu8v-9gGlQEg" guard="_XRKqoJeQEemu8v-9gGlQEg" kind="external" source="_Xlmw8JeNEemu8v-9gGlQEg" target="_EGH_0JeVEemu8v-9gGlQEg">
                 <ownedRule xmi:type="uml:Constraint" xmi:id="_XRKqoJeQEemu8v-9gGlQEg">
                   <specification xmi:type="uml:OpaqueExpression" xmi:id="_XRLRsJeQEemu8v-9gGlQEg">
                     <language>C++</language>
@@ -705,6 +705,11 @@ else
                   <event xmi:type="uml:CallEvent" href="pathmap://UMLRTRTSLIB/UMLRT-RTS.uml#_IaEO8HDxEeSwWKwNKw1iAA"/>
                 </trigger>
               </transition>
+              <transition xmi:type="uml:Transition" xmi:id="_KyKaAJeVEemu8v-9gGlQEg" name="" kind="external" source="_EGH_0JeVEemu8v-9gGlQEg" target="_n-cNIJd4Eemu8v-9gGlQEg">
+                <trigger xmi:type="uml:Trigger" xmi:id="_SvGbYJeVEemu8v-9gGlQEg" port="_xFvwEIieEeiP-_qqZZR9Jg">
+                  <event xmi:type="uml:CallEvent" href="pathmap://UMLRTRTSLIB/UMLRT-RTS.uml#_IaEO8HDxEeSwWKwNKw1iAA"/>
+                </trigger>
+              </transition>
               <subvertex xmi:type="uml:State" xmi:id="_XLutoJdnEemu8v-9gGlQEg" name="IS_BALL_ACHIVEABLE">
                 <entry xmi:type="uml:OpaqueBehavior" xmi:id="_pLmzkJdnEemu8v-9gGlQEg" name="Entry" isReentrant="false">
                   <language>C++</language>
@@ -722,8 +727,10 @@ if ( (abs(abs(__playerXINT) - abs(__ballXINT)) &lt; 6) &amp;&amp; (abs(abs(__pla
 else 
 	ballAchiveable = false;
  
+observationPort.setCommand(&quot;player2,setsetSuction(100)&quot;).send();
 
-timer.informIn(UMLRTTimespec(0, 1000));</body>
+std::cout&lt;&lt;&quot;[SUCK CMD]:[player2,setsetSuction(100)] \n&quot;;
+timer.informIn(UMLRTTimespec(0, 500000000));</body>
                 </entry>
               </subvertex>
               <subvertex xmi:type="uml:Pseudostate" xmi:id="_gFG5YJd4Eemu8v-9gGlQEg" kind="choice"/>
@@ -780,6 +787,15 @@ char* cmdCHAR = strcpy(new char[cmd.length() + 1], cmd.c_str());
 observationPort.setCommand(cmdCHAR).send();
 
 std::cout&lt;&lt;&quot;[STOP CMD]:&quot;&lt;&lt;cmd&lt;&lt;&quot; \n&quot;;
+timer.informIn(UMLRTTimespec(0, 500000000));</body>
+                </entry>
+              </subvertex>
+              <subvertex xmi:type="uml:State" xmi:id="_EGH_0JeVEemu8v-9gGlQEg" name="SET_SUCKTION">
+                <entry xmi:type="uml:OpaqueBehavior" xmi:id="_NEHOgJeVEemu8v-9gGlQEg" name="Entry" isReentrant="false">
+                  <language>C++</language>
+                  <body>observationPort.setCommand(&quot;player2,setsetSuction(100)&quot;).send();
+
+std::cout&lt;&lt;&quot;[SUCK CMD]:[player2,setsetSuction(100)] \n&quot;;
 timer.informIn(UMLRTTimespec(0, 500000000));</body>
                 </entry>
               </subvertex>
@@ -1116,4 +1132,5 @@ if (pos1 != -1)
   <UMLRTStateMachines:RTState xmi:id="_vQyXYJeOEemu8v-9gGlQEg" base_State="_vQxJQJeOEemu8v-9gGlQEg"/>
   <UMLRTStateMachines:RTState xmi:id="_813tAJeOEemu8v-9gGlQEg" base_State="_81130JeOEemu8v-9gGlQEg"/>
   <UMLRTStateMachines:RTState xmi:id="_3_IgMJeREemu8v-9gGlQEg" base_State="_3_GrAJeREemu8v-9gGlQEg"/>
+  <UMLRTStateMachines:RTState xmi:id="_EGJN8JeVEemu8v-9gGlQEg" base_State="_EGH_0JeVEemu8v-9gGlQEg"/>
 </xmi:XMI>
