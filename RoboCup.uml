@@ -950,18 +950,18 @@ timer.informIn(UMLRTTimespec(0, 500000000));</body>
               <subvertex xmi:type="uml:State" xmi:id="_EGH_0JeVEemu8v-9gGlQEg" name="SET_SUCKTION1">
                 <entry xmi:type="uml:OpaqueBehavior" xmi:id="_NEHOgJeVEemu8v-9gGlQEg" name="Entry" isReentrant="false">
                   <language>C++</language>
-                  <body>observationPort.setCommand(&quot;player2,setsetSuction(-100)&quot;).send();
+                  <body>observationPort.setCommand(&quot;player2,setSuction(100)&quot;).send();
 
-std::cout&lt;&lt;&quot;[SUCK CMD]:[player2,setsetSuction(-100)] \n&quot;;
+std::cout&lt;&lt;&quot;[SUCK CMD]:[player2,setSuction(100)] \n&quot;;
 timer.informIn(UMLRTTimespec(0, 500000000));</body>
                 </entry>
               </subvertex>
               <subvertex xmi:type="uml:State" xmi:id="_U3PH8JgWEemlgp8TkwLmkA" name="SET_SUCKTION2">
                 <entry xmi:type="uml:OpaqueBehavior" xmi:id="_WlHmEJgWEemlgp8TkwLmkA" name="Entry" isReentrant="false">
                   <language>C++</language>
-                  <body>observationPort.setCommand(&quot;player2,setsetSuction(-100)&quot;).send();
+                  <body>observationPort.setCommand(&quot;player2,setSuction(100)&quot;).send();
 
-std::cout&lt;&lt;&quot;[SUCK CMD]:[player2,setsetSuction(-100)] \n&quot;;
+std::cout&lt;&lt;&quot;[SUCK CMD]:[player2,setSuction(100)] \n&quot;;
 timer.informIn(UMLRTTimespec(0, 500000000));</body>
                 </entry>
               </subvertex>
