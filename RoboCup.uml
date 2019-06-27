@@ -380,7 +380,7 @@ timer.informIn(UMLRTTimespec(0, 1000));</body>
       </ownedAttribute>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_L0LZsJjfEemlgp8TkwLmkA" name="goalX">
         <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusC_Cpp_LIBRARIES/AnsiCLibrary.uml#_7W3wkBydEduyofBvg4RL2w"/>
-        <defaultValue xmi:type="uml:LiteralReal" xmi:id="_L0LZsZjfEemlgp8TkwLmkA" value="45.99"/>
+        <defaultValue xmi:type="uml:LiteralReal" xmi:id="_L0LZsZjfEemlgp8TkwLmkA" value="-45.99"/>
       </ownedAttribute>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_L0NO4JjfEemlgp8TkwLmkA" name="goalZ" visibility="public">
         <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusC_Cpp_LIBRARIES/AnsiCLibrary.uml#_7W3wkBydEduyofBvg4RL2w"/>
@@ -878,7 +878,6 @@ else if ( (__compass &lt; angleINT) &amp;&amp; (angleINT - __compass > 180) ){ r
 else if ( (__compass &lt; angleINT) &amp;&amp; (angleINT - __compass &lt; 180) ){ rotation = angleINT - __compass; spinPower = -30;}
 else {std::cout&lt;&lt;&quot;[CALC SPIN] : ERROR !&quot;&lt;&lt;&quot;\n&quot;;}
 
-
 std::cout&lt;&lt;&quot;-------------> [angle]:&quot;&lt;&lt; angle * 180 / 3.14&lt;&lt;&quot;\n&quot;;
 std::cout&lt;&lt;&quot;-------------> [angleINT]:&quot;&lt;&lt; angleINT&lt;&lt;&quot;\n&quot;;
 std::cout&lt;&lt;&quot;-------------> [compass]:&quot;&lt;&lt; __compass &lt;&lt;&quot;\n&quot;;
@@ -1060,39 +1059,19 @@ std::cout&lt;&lt;&quot;========> [CALC_ROTATION TOWARDS THE GOAL][angleINT]: &qu
 
 //Rotation angle
 
-if (angleINT &lt; 0){
-	rotation = 360 - abs(angleINT) - __compass;
-	spinPower = 30;
-}else{
-	if (__compass > angleINT){
-		spinPower = -30;
-		rotation = __compass - angleINT;
-	}else{
-		spinPower = 30;
-		rotation = angleINT -__compass;
-	}
+if (angleINT &lt; 0 &amp;&amp; __compass > 180){
+	if (__compass - 180 > abs (angleINT)){spinPower = -30; rotation = (__compass -180) - abs(angleINT);}
+	else if (__compass - 180 &lt;= abs (angleINT)){spinPower = 30; rotation = abs(angleINT) - (__compass -180);}
+}else if (angleINT &lt; 0 &amp;&amp; __compass &lt;= 180){
+	spinPower = 30; rotation = abs(angleINT) + 180 - __compass;
+}else if (angleINT > 0 &amp;&amp; __compass > 180){
+	spinPower = -30; rotation = abs(angleINT) + 180 - __compass;
+}else if (angleINT > 0 &amp;&amp; __compass &lt; 180){
+	if (180 - angleINT >  __compass){spinPower = 30; rotation = 180 - abs(angleINT) - __compass; }
+	else if (180 - angleINT &lt;  __compass){spinPower = -30; rotation = __compass - (180 - abs(angleINT));}
 }
-/*
-if ( (__compass > angleINT) &amp;&amp; (__compass - angleINT > 180) ){ rotation = 360 - (__compass - angleINT); spinPower = 30;}
-else if ( (__compass > angleINT) &amp;&amp; (__compass - angleINT &lt; 180) ){ rotation = __compass - angleINT; spinPower = -30;}
-else if ( (__compass &lt; angleINT) &amp;&amp; (angleINT - __compass > 180) ){ rotation = 360 - (angleINT - __compass); spinPower = 30;}
-else if ( (__compass &lt; angleINT) &amp;&amp; (angleINT - __compass &lt; 180) ){ rotation = angleINT - __compass; spinPower = -30;}
-else {std::cout&lt;&lt;&quot;[CALC SPIN] : ERROR !&quot;&lt;&lt;&quot;\n&quot;;}
-*/
-/*
-if (__compass &lt; 180){
-	rotation = (180 + angleFLOAT) - __compass;
-	spinPower = 30;
-}else {
-	if (__compass - 180 &lt; angleFLOAT){
-		rotation = angleFLOAT - (__compass - 180);
-		spinPower = 30;
-	}else{
-		rotation = (__compass - 180) - angleFLOAT;
-		spinPower = -30;
-	}
-}
-*/
+
+
 spinTime = 500000000;
 
 timer.informIn(UMLRTTimespec(0, 1000));
@@ -1170,9 +1149,9 @@ timerId = timer.informIn(UMLRTTimespec(0, 1500000000));</body>
                       <language>C++</language>
                       <body>std::cout&lt;&lt;&quot;[MOVE_TO_GOAL][ROTATE] \n&quot;;
 
-spinTime = 500000000;
-if (abs(rotation) &lt;5 ) {spinPower = 0;}
-else if ( abs(__prvRotation) &lt; abs(rotation)) {spinPower = __prvSpinPower*-1; spinTime = 100000000;}
+spinTime = 200000000;
+if (abs(rotation) &lt;7 ) {spinPower = 0;}
+//else if ( abs(__prvRotation) &lt; abs(rotation)) {spinPower = __prvSpinPower*-1; spinTime = 100000000;}
 
 std::cout&lt;&lt;__prvRotation&lt;&lt;&quot; -----------> [CALC_ROTATION TOWARDS THE GOAL][rotation]: &quot;&lt;&lt; rotation &lt;&lt; &quot; [spinPower]: &quot; &lt;&lt; spinPower&lt;&lt;&quot; \n&quot;;
 
