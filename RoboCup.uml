@@ -1230,7 +1230,7 @@ if (angleINT &lt; 0 &amp;&amp; __compass > 180){
 }else if (angleINT &lt; 0 &amp;&amp; __compass &lt;= 180){
 	spinPower = 40; rotation = abs(angleINT) + 180 - __compass;
 }else if (angleINT > 0 &amp;&amp; __compass > 180){
-	spinPower = -40; rotation = abs(angleINT) + 180 - __compass;
+	spinPower = -40; rotation = __compass - (180 - abs(angleINT));
 }else if (angleINT > 0 &amp;&amp; __compass &lt; 180){
 	if (180 - angleINT >  __compass){spinPower = 40; rotation = 180 - abs(angleINT) - __compass; }
 	else if (180 - angleINT &lt;  __compass){spinPower = -40; rotation = __compass - (180 - abs(angleINT));}
@@ -1496,7 +1496,7 @@ if (angleINT &lt; 0 &amp;&amp; __compass > 180){
 }else if (angleINT &lt; 0 &amp;&amp; __compass &lt;= 180){
 	spinPower = 50; rotation = abs(angleINT) + 180 - __compass;
 }else if (angleINT > 0 &amp;&amp; __compass > 180){
-	spinPower = -50; rotation = abs(angleINT) + 180 - __compass;
+	spinPower = -50; rotation = __compass - (180 - abs(angleINT));
 }else if (angleINT > 0 &amp;&amp; __compass &lt; 180){
 	if (180 - angleINT >  __compass){spinPower = 50; rotation = 180 - abs(angleINT) - __compass; }
 	else if (180 - angleINT &lt;  __compass){spinPower = -50; rotation = __compass - (180 - abs(angleINT));}

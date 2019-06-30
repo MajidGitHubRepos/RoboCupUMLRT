@@ -5846,7 +5846,7 @@
                 <layoutConstraint xmi:type="notation:Location" xmi:id="_oNEAcZrEEemI69k4e-oa_g" x="-10" y="-10"/>
               </children>
               <element xmi:type="uml:State" href="RoboCup.uml#_tDCLYJdXEemu8v-9gGlQEg"/>
-              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_oM7dkZrEEemI69k4e-oa_g" x="101" y="53" width="383"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_oM7dkZrEEemI69k4e-oa_g" x="101" y="130" width="383"/>
             </children>
             <children xmi:type="notation:Shape" xmi:id="_oM7dmZrEEemI69k4e-oa_g" type="State_Shape">
               <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_oUpPIJrEEemI69k4e-oa_g" source="PapyrusCSSForceValue">
