@@ -1720,8 +1720,8 @@
       </children>
       <styles xmi:type="notation:FontStyle" xmi:id="_7louoZnHEemHu_dwIWKvwA"/>
       <element xmi:type="uml:Transition" href="RoboCup.uml#_7lQ7MJnHEemHu_dwIWKvwA"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_7louopnHEemHu_dwIWKvwA" points="[620, 152, -643984, -643984]$[620, 100, -643984, -643984]$[223, 100, -643984, -643984]$[223, 150, -643984, -643984]"/>
-      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_7mb_4JnHEemHu_dwIWKvwA" id="(0.5,0.0)"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_7louopnHEemHu_dwIWKvwA" points="[620, 154, -643984, -643984]$[620, 100, -643984, -643984]$[223, 100, -643984, -643984]$[223, 150, -643984, -643984]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_7mb_4JnHEemHu_dwIWKvwA" id="(0.9,0.2)"/>
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_8AHEIJnHEemHu_dwIWKvwA" id="(0.5,0.0)"/>
     </edges>
     <edges xmi:type="notation:Connector" xmi:id="_A66V8JnjEemHu_dwIWKvwA" type="Transition_Edge" source="_A7PGEJnjEemHu_dwIWKvwA" target="_A7Wa0JnjEemHu_dwIWKvwA">
