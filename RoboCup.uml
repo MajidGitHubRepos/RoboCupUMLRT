@@ -863,7 +863,7 @@ timerId = timer.informIn(UMLRTTimespec(0, 500000000));</body>
                   </subvertex>
                 </region>
               </subvertex>
-              <subvertex xmi:type="uml:State" xmi:id="_wy3z0JdPEemu8v-9gGlQEg" name="MOVE_FB">
+              <subvertex xmi:type="uml:State" xmi:id="_wy3z0JdPEemu8v-9gGlQEg" name="MOVE_FORWARD_1">
                 <entry xmi:type="uml:OpaqueBehavior" xmi:id="_9hgNIJdQEemu8v-9gGlQEg" name="Entry" isReentrant="false">
                   <language>C++</language>
                   <body>std::string cmd = &quot;player2,moveForward(&quot;+std::to_string(100)+&quot;)&quot;;
@@ -1057,7 +1057,7 @@ observationPort.getPlayerCompass().send();</body>
 timerId = timer.informIn(UMLRTTimespec(0, 100000));</body>
                 </entry>
               </subvertex>
-              <subvertex xmi:type="uml:State" xmi:id="_tPNrYJwnEemcmdsy3pl2Ng" name="MOVE">
+              <subvertex xmi:type="uml:State" xmi:id="_tPNrYJwnEemcmdsy3pl2Ng" name="MOVE_FORWARD_2">
                 <entry xmi:type="uml:OpaqueBehavior" xmi:id="_wVZZMJwnEemcmdsy3pl2Ng" name="Entry" isReentrant="false">
                   <language>C++</language>
                   <body>std::string cmd = &quot;player2,moveForward(&quot;+std::to_string(100)+&quot;)&quot;;
@@ -1700,7 +1700,7 @@ char* cmdCHAR = strcpy(new char[cmd.length() + 1], cmd.c_str());
 observationPort.setCommand(cmdCHAR).send();
 
 std::cout&lt;&lt;&quot;[MOVE_FB CMD]:&quot;&lt;&lt;cmd&lt;&lt;&quot; \n&quot;;
-timerId = timer.informIn(UMLRTTimespec(0, 1500000000));</body>
+timerId = timer.informIn(UMLRTTimespec(0, 2000000000));</body>
                     </entry>
                   </subvertex>
                   <subvertex xmi:type="uml:State" xmi:id="_Exru0JnFEemHu_dwIWKvwA" name="SHOOT">
