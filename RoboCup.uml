@@ -1463,7 +1463,7 @@ __prvCompass = __compass +10;</body>
               </transition>
               <transition xmi:type="uml:Transition" xmi:id="__efk0JnuEemHu_dwIWKvwA" kind="local" source="_A5VooJnjEemHu_dwIWKvwA" target="_6BvoQJnuEemHu_dwIWKvwA"/>
               <transition xmi:type="uml:Transition" xmi:id="_DjhzQJwuEemcmdsy3pl2Ng" kind="local" source="_3wY8YJwtEemcmdsy3pl2Ng" target="_6BvoQJnuEemHu_dwIWKvwA"/>
-              <subvertex xmi:type="uml:State" xmi:id="_ZiiUgJeJEemu8v-9gGlQEg" name="CALC_ROTATION">
+              <subvertex xmi:type="uml:State" xmi:id="_ZiiUgJeJEemu8v-9gGlQEg" name="ROTATION_TOWARDS_GOAL">
                 <connectionPoint xmi:type="uml:Pseudostate" xmi:id="_VM64cJjkEemlgp8TkwLmkA" kind="entryPoint"/>
                 <connectionPoint xmi:type="uml:Pseudostate" xmi:id="_VM97wJjkEemlgp8TkwLmkA" kind="exitPoint"/>
                 <region xmi:type="uml:Region" xmi:id="_VM3OEJjkEemlgp8TkwLmkA" name="Region1">
