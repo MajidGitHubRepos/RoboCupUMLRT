@@ -1860,7 +1860,7 @@
         <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_MuTugJdREemu8v-9gGlQEg" key="mutable" value="true"/>
       </eAnnotations>
       <children xmi:type="notation:DecorationNode" xmi:id="_KPlw8pavEemCgN1WwdiMbQ" type="State_NameLabel_TN">
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KPlw85avEemCgN1WwdiMbQ" width="1178" height="19"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KPlw85avEemCgN1WwdiMbQ" width="972" height="19"/>
       </children>
       <children xmi:type="notation:BasicCompartment" xmi:id="_KPlw9JavEemCgN1WwdiMbQ" type="State_RegionCompartment_TN">
         <children xmi:type="notation:Shape" xmi:id="_KPlw9ZavEemCgN1WwdiMbQ" type="Region_Shape">
@@ -2222,9 +2222,9 @@
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KPlw-ZavEemCgN1WwdiMbQ"/>
           </children>
           <element xmi:type="uml:Region" href="RoboCup.uml#_KPki0JavEemCgN1WwdiMbQ"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KPlw-pavEemCgN1WwdiMbQ" width="1178" height="444"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KPlw-pavEemCgN1WwdiMbQ" width="972" height="444"/>
         </children>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KPlw-5avEemCgN1WwdiMbQ" y="19" width="1178" height="444"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KPlw-5avEemCgN1WwdiMbQ" y="19" width="972" height="444"/>
       </children>
       <children xmi:type="notation:Compartment" xmi:id="_KPlw_JavEemCgN1WwdiMbQ" type="InternalTransitions">
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KPlw_ZavEemCgN1WwdiMbQ"/>
@@ -2290,7 +2290,7 @@
           <layoutConstraint xmi:type="notation:Location" xmi:id="_LeQ3RZtUEemI69k4e-oa_g" x="25" y="-10"/>
         </children>
         <element xmi:type="uml:Pseudostate" href="RoboCup.uml#_LbTC0JtUEemI69k4e-oa_g"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LeQ3QZtUEemI69k4e-oa_g" y="-4" width="10" height="10"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LeQ3QZtUEemI69k4e-oa_g" x="326" y="-5" width="10" height="10"/>
       </children>
       <children xmi:type="notation:Shape" xmi:id="_LeReUJtUEemI69k4e-oa_g" type="Pseudostate_EntryPointShape">
         <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_LyMf4ZtUEemI69k4e-oa_g" source="PapyrusCSSForceValue">
@@ -2306,7 +2306,7 @@
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LeReUZtUEemI69k4e-oa_g" x="-5" y="186" width="10" height="10"/>
       </children>
       <element xmi:type="uml:State" href="RoboCup.uml#_M-YgUIieEeiP-_qqZZR9Jg"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KPlw_pavEemCgN1WwdiMbQ" x="30" y="30" width="1178" height="463"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KPlw_pavEemCgN1WwdiMbQ" x="30" y="30" width="972" height="463"/>
     </children>
     <styles xmi:type="notation:StringValueStyle" xmi:id="_KPlw_5avEemCgN1WwdiMbQ" name="diagram_compatibility_version" stringValue="1.3.0"/>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_KPlxAJavEemCgN1WwdiMbQ"/>
